@@ -7,9 +7,13 @@ function dump($val){
 
 class BigSum{
 
+
     public function sum($strNum1 = '', $strNum2 = ''){
-        $ar1 = str_split($strNum1);
-        $ar2 = str_split($strNum2);
+
+        $this->validateNums($strNum1, $strNum2)?'':die();        
+
+        $ar1 = str_split(trim($strNum1));
+        $ar2 = str_split(trim($strNum2));
 
         $len1 = count($ar1);
         $len2 = count($ar2);
@@ -52,6 +56,20 @@ class BigSum{
         $resAr = array_reverse($resAr);
 
         return join($resAr);
+    }
+
+    private function validateNums($strNum1, $strNum2){
+        $flag = true;
+        if(!is_numeric($strNum1) || strpos($strNum1,'.')!==false){
+            print "num1 is not valid, enter integer val; \n";
+            $flag = false;
+        }
+        if(!is_numeric($strNum2) || strpos($strNum2,'.')!==false){
+            print "num2 is not valid, enter integer val; \n";
+            $flag = false;
+        }
+
+        return $flag;
     }
 
 }
